@@ -1,0 +1,12 @@
+/* ── Scroll Progress ─────────────────────────────────────── */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--accent);
+  z-index: 9998;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 8px rgba(76, 201, 240, 0.45);
+}

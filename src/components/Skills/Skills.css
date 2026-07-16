@@ -1,0 +1,93 @@
+/* ── Skills ──────────────────────────────────────────────── */
+
+.skills-categories {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-24);
+}
+
+.skill-category-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-32);
+  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+.skill-category-card:hover {
+  border-color: var(--accent-border);
+  box-shadow: 0 0 0 1px var(--accent-border), var(--shadow);
+}
+
+.skill-category-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-12);
+  margin-bottom: var(--sp-24);
+  padding-bottom: var(--sp-16);
+  border-bottom: 1px solid var(--border);
+}
+
+.skill-category-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+
+.skill-category-name {
+  font-family: var(--font-display);
+  font-size: var(--fs-16);
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+/* Skill item — minimal horizontal bar with mono % label */
+.skill-item { margin-bottom: var(--sp-16); }
+.skill-item:last-child { margin-bottom: 0; }
+
+.skill-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--sp-8);
+}
+
+.skill-name {
+  font-size: var(--fs-14);
+  font-weight: 500;
+  color: var(--text);
+}
+
+.skill-percent {
+  font-family: var(--font-mono);
+  font-size: var(--fs-12);
+  font-weight: 500;
+  color: var(--text-faint);
+}
+
+.skill-bar-track {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  width: 0%;
+  transition: width 1.1s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 6px rgba(76, 201, 240, 0.35);
+}
+
+@media (max-width: 768px) {
+  .skills-categories { grid-template-columns: 1fr; }
+}
