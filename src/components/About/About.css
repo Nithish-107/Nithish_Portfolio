@@ -221,5 +221,9 @@
 
 @media (max-width: 480px) {
   .about-strengths { grid-template-columns: 1fr 1fr; }
-  .about-exp-badge { right: 0; bottom: -1rem; }
+  /* Badge repositioned so it doesn't overflow the card edge */
+  .about-exp-badge { right: 0; bottom: -1rem; padding: var(--sp-12) var(--sp-16); }
+  .about-exp-badge strong { font-size: var(--fs-28); }
+  /* Terminal lines — allow wrap on narrow screens */
+  .atl { white-space: normal; word-break: break-word; }
 }

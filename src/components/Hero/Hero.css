@@ -395,5 +395,13 @@
 @media (max-width: 480px) {
   .hero-image-container { width: 200px; height: 200px; }
   .hero-actions { flex-direction: column; align-items: center; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
   .hero-stats   { gap: var(--sp-24); }
+  /* Prevent float icons from clipping outside viewport */
+  .hero-float-icon:nth-child(1) { right: -4%; }
+  .hero-float-icon:nth-child(2) { left: -4%; }
+  .hero-float-icon:nth-child(3) { right: -2%; }
+  .hero-float-icon:nth-child(4) { left:  0%; }
+  /* Code card — allow text to wrap on very small screens */
+  .hero-code-line { white-space: normal; word-break: break-word; }
 }

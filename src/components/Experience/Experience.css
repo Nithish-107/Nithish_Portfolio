@@ -168,3 +168,8 @@
 
   .timeline-spacer { display: none; }
 }
+
+@media (max-width: 480px) {
+  .timeline-card { padding: var(--sp-16); }
+  .timeline-role { font-size: var(--fs-16); }
+}

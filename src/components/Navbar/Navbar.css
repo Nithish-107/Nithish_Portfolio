@@ -174,3 +174,9 @@
   .hamburger    { display: flex; }
   .mobile-menu  { display: flex; }
 }
+
+@media (max-width: 480px) {
+  /* Ensure logo and hamburger never overlap on very small screens */
+  .navbar-inner { gap: var(--sp-8); }
+  .navbar-logo  { font-size: var(--fs-14); }
+}
