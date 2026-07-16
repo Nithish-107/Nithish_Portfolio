@@ -19,7 +19,7 @@ const Footer       = lazy(() => import('./components/Footer/Footer'));
 
 export default function App() {
   // ── Theme ──────────────────────────────────────────────────
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
