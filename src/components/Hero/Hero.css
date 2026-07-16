@@ -316,7 +316,7 @@
 .hc-fn  { color: #4CC9F0; opacity: 0.9; }      /* accent  — method    */
 .hc-pu  { color: #9AA4B2; opacity: 0.6; }      /* muted   — punctuation */
 
-/* Floating tech icons — glass chips */
+/* Floating tech icons — glass chips orbiting the outer ring */
 .hero-float-icon {
   position: absolute;
   width: 44px;
@@ -330,12 +330,20 @@
   font-size: 1.25rem;
   animation: float 5s ease-in-out infinite;
   box-shadow: var(--shadow-sm);
+  /* Center each tile on its ring point */
+  transform: translate(-50%, -50%);
+  color: var(--text-muted);
 }
 
-.hero-float-icon:nth-child(1) { top: 4%;   right: -8%;  animation-delay: 0s; }
-.hero-float-icon:nth-child(2) { top: 28%;  left: -10%;  animation-delay: 1.2s; }
-.hero-float-icon:nth-child(3) { bottom: 18%; right: -6%; animation-delay: 2.4s; }
-.hero-float-icon:nth-child(4) { bottom: 4%;  left: -4%;  animation-delay: 0.6s; }
+/* 8 icons evenly at 45° intervals on the outer ring (radius ≈196px, container 320px) */
+.fi-java     { top: -11.25%; left:  50%;     } /* 0°   top          */
+.fi-spring   { top:   6.7%;  left:  93.3%;   } /* 45°  top-right    */
+.fi-react    { top:  50%;    left: 111.25%;  } /* 90°  right        */
+.fi-html     { top:  93.3%;  left:  93.3%;   } /* 135° bottom-right */
+.fi-css      { top: 111.25%; left:  50%;     } /* 180° bottom       */
+.fi-mysql    { top:  93.3%;  left:   6.7%;   } /* 225° bottom-left  */
+.fi-vscode   { top:  50%;    left: -11.25%;  } /* 270° left         */
+.fi-intellij { top:   6.7%;  left:   6.7%;   } /* 315° top-left     */
 
 /* Scroll indicator */
 .hero-scroll {
@@ -397,11 +405,8 @@
   .hero-actions { flex-direction: column; align-items: center; }
   .hero-actions .btn { width: 100%; justify-content: center; }
   .hero-stats   { gap: var(--sp-24); }
-  /* Prevent float icons from clipping outside viewport */
-  .hero-float-icon:nth-child(1) { right: -4%; }
-  .hero-float-icon:nth-child(2) { left: -4%; }
-  .hero-float-icon:nth-child(3) { right: -2%; }
-  .hero-float-icon:nth-child(4) { left:  0%; }
+  /* Hide orbit icons on mobile — they overflow the smaller container */
+  .hero-float-icon { display: none; }
   /* Code card — allow text to wrap on very small screens */
   .hero-code-line { white-space: normal; word-break: break-word; }
 }

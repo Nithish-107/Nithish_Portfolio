@@ -1,7 +1,7 @@
 // Hero section with typing animation, animated background, stats, and CTA buttons
 import { useState, useEffect } from 'react';
 import { FiFolder, FiDownload, FiMail } from 'react-icons/fi';
-import { SiOpenjdk, SiSpringboot, SiReact, SiMysql } from 'react-icons/si';
+import { SiOpenjdk, SiSpringboot, SiReact, SiMysql, SiHtml5, SiCss, SiGit, SiIntellijidea } from 'react-icons/si';
 import { personalInfo } from '../../data/portfolioData';
 import { useCounter } from '../../hooks/useScrollReveal';
 import './Hero.css';
@@ -13,12 +13,17 @@ const TYPING_STRINGS = [
   'Problem Solver',
 ];
 
-// Floating tech icons — Si brand icons instead of emoji
+// Floating tech icons — evenly distributed around the outer ring
+// Angles are clockwise from top; radius matches .hero-ring-2 (inset: -36px → ~196px from center)
 const FLOAT_ICONS = [
-  <SiOpenjdk key="java" />,
-  <SiReact key="react" />,
-  <SiSpringboot key="spring" />,
-  <SiMysql key="mysql" />,
+  { icon: <SiOpenjdk />,          cls: 'fi-java',      delay: '0s'    }, // 0°   top
+  { icon: <SiSpringboot />,       cls: 'fi-spring',    delay: '0.6s'  }, // 45°  top-right
+  { icon: <SiReact />,            cls: 'fi-react',     delay: '1.2s'  }, // 90°  right
+  { icon: <SiHtml5 />,            cls: 'fi-html',      delay: '1.8s'  }, // 135° bottom-right
+  { icon: <SiCss />,              cls: 'fi-css',       delay: '2.4s'  }, // 180° bottom
+  { icon: <SiMysql />,            cls: 'fi-mysql',     delay: '3.0s'  }, // 225° bottom-left
+  { icon: <SiGit />,              cls: 'fi-vscode',    delay: '3.6s'  }, // 270° left
+  { icon: <SiIntellijidea />,     cls: 'fi-intellij',  delay: '4.2s'  }, // 315° top-left
 ];
 
 function useTyping(strings, speed = 80, pause = 1800) {
@@ -134,9 +139,9 @@ export default function Hero() {
             <div className="hero-pulse" />
             <div className="hero-pulse hero-pulse-2" />
 
-            {/* Floating tech icons */}
-            {FLOAT_ICONS.map((icon, i) => (
-              <div key={i} className="hero-float-icon">{icon}</div>
+            {/* Floating tech icons — orbiting the ring */}
+            {FLOAT_ICONS.map(({ icon, cls, delay }) => (
+              <div key={cls} className={`hero-float-icon ${cls}`} style={{ animationDelay: delay }}>{icon}</div>
             ))}
 
             {/* Code editor card */}
