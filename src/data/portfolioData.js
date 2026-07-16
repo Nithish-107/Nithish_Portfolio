@@ -134,7 +134,7 @@ export const education = [
     field: "Computer Science & Engineering",
     institution: "Sri Ramakrishna Institute of Technology",
     location: "Coimbatore, TN",
-    duration: "2020 – 2024",
+    duration: "2021 – 2025",
     grade: "7.30 CGPA",
     highlights: ["Full Stack Development", "Data Structures", "DBMS", "OS"],
   },
