@@ -1,0 +1,587 @@
+/* ============================================================
+   portfolio-tech.css — Techy dark overlay layer
+   Enhances existing styles. No element selectors. No layout changes.
+   All animations respect prefers-reduced-motion.
+   ============================================================ */
+
+/* ── Keyframes ─────────────────────────────────────────────── */
+@keyframes pt-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes pt-border-spin {
+  to { --pt-angle: 360deg; }
+}
+@keyframes pt-fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pt-glow-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(76,201,240,0.18), 0 0 32px rgba(167,139,250,0.10); }
+  50%       { box-shadow: 0 0 24px rgba(76,201,240,0.32), 0 0 56px rgba(167,139,250,0.20); }
+}
+@keyframes pt-scan-line {
+  0%   { transform: translateY(-100%); opacity: 0.06; }
+  100% { transform: translateY(100vh);  opacity: 0.06; }
+}
+@keyframes pt-dot-breathe {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%       { opacity: 1;    transform: scale(1.15); }
+}
+
+/* ── CSS custom property for animated border angle ─────────── */
+@property --pt-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: #0B0E14; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #4CC9F0, #A78BFA);
+  border-radius: 3px;
+}
+::selection {
+  background: rgba(76, 201, 240, 0.22);
+  color: #4CC9F0;
+}
+
+/* ── Subtle scan-line overlay on body ──────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(76, 201, 240, 0.012) 2px,
+    rgba(76, 201, 240, 0.012) 4px
+  );
+}
+
+/* ── Navbar ────────────────────────────────────────────────── */
+.navbar.scrolled {
+  background: rgba(11, 14, 20, 0.75) !important;
+  backdrop-filter: blur(24px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
+  border-bottom: 1px solid rgba(76, 201, 240, 0.18) !important;
+  box-shadow: 0 1px 0 rgba(76, 201, 240, 0.12), 0 4px 24px rgba(0,0,0,0.5) !important;
+}
+
+.navbar-logo {
+  background: linear-gradient(90deg, #4CC9F0, #A78BFA, #4CC9F0);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: pt-shimmer 4s linear infinite;
+}
+
+.nav-link {
+  position: relative;
+  transition: color 0.2s ease !important;
+}
+.nav-link:hover { color: #4CC9F0 !important; }
+.nav-link.active { color: #4CC9F0 !important; }
+.nav-link::after {
+  background: linear-gradient(90deg, #4CC9F0, #A78BFA) !important;
+  height: 2px !important;
+  border-radius: 2px !important;
+}
+
+.theme-toggle {
+  background: rgba(76, 201, 240, 0.06) !important;
+  border: 1px solid rgba(76, 201, 240, 0.18) !important;
+  transition: all 0.2s ease !important;
+}
+.theme-toggle:hover {
+  background: rgba(76, 201, 240, 0.14) !important;
+  border-color: rgba(76, 201, 240, 0.45) !important;
+  box-shadow: 0 0 12px rgba(76, 201, 240, 0.25) !important;
+}
+
+/* ── Hero ──────────────────────────────────────────────────── */
+.hero-name {
+  background: linear-gradient(135deg, #E6E9EF 0%, #4CC9F0 45%, #A78BFA 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: pt-shimmer 6s linear infinite;
+}
+
+.hero-name span {
+  background: linear-gradient(135deg, #4CC9F0, #A78BFA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-badge {
+  background: rgba(76, 201, 240, 0.08) !important;
+  border: 1px solid rgba(76, 201, 240, 0.30) !important;
+  box-shadow: 0 0 16px rgba(76, 201, 240, 0.10) !important;
+}
+
+/* Primary CTA — animated gradient shimmer border */
+.btn-primary {
+  background: linear-gradient(135deg, #4CC9F0, #A78BFA, #4CC9F0) !important;
+  background-size: 200% auto !important;
+  color: #0B0E14 !important;
+  font-weight: 700 !important;
+  animation: pt-shimmer 3s linear infinite !important;
+  box-shadow: 0 0 20px rgba(76, 201, 240, 0.30) !important;
+  border: none !important;
+}
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.03) !important;
+  box-shadow: 0 0 36px rgba(76, 201, 240, 0.50), 0 0 60px rgba(167, 139, 250, 0.25) !important;
+}
+
+.btn-ghost {
+  border: 1px solid rgba(76, 201, 240, 0.22) !important;
+  color: #9AA4B2 !important;
+  background: rgba(76, 201, 240, 0.04) !important;
+  transition: all 0.25s ease !important;
+}
+.btn-ghost:hover {
+  border-color: rgba(76, 201, 240, 0.55) !important;
+  color: #4CC9F0 !important;
+  background: rgba(76, 201, 240, 0.10) !important;
+  box-shadow: 0 0 16px rgba(76, 201, 240, 0.20) !important;
+  transform: translateY(-2px) !important;
+}
+
+.hero-stat-number {
+  background: linear-gradient(135deg, #4CC9F0, #A78BFA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-float-icon {
+  background: rgba(18, 22, 31, 0.85) !important;
+  border: 1px solid rgba(76, 201, 240, 0.20) !important;
+  box-shadow: 0 0 12px rgba(76, 201, 240, 0.12), 0 4px 16px rgba(0,0,0,0.5) !important;
+  color: #4CC9F0 !important;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+.hero-float-icon:hover {
+  border-color: rgba(76, 201, 240, 0.55) !important;
+  box-shadow: 0 0 24px rgba(76, 201, 240, 0.35) !important;
+}
+
+/* ── Section headers ───────────────────────────────────────── */
+.section-title span {
+  background: linear-gradient(135deg, #4CC9F0, #A78BFA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-tag {
+  color: #4CC9F0 !important;
+  text-shadow: 0 0 12px rgba(76, 201, 240, 0.40);
+}
+
+/* ── Glass card base — applied to all major cards ──────────── */
+.skill-category-card,
+.project-card,
+.timeline-card,
+.education-card,
+.cert-card,
+.contact-form-card {
+  background: rgba(18, 22, 31, 0.72) !important;
+  backdrop-filter: blur(18px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(140%) !important;
+  border: 1px solid rgba(76, 201, 240, 0.10) !important;
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease !important;
+}
+
+.skill-category-card:hover,
+.project-card:hover,
+.timeline-card:hover,
+.education-card:hover,
+.cert-card:hover {
+  border-color: rgba(76, 201, 240, 0.38) !important;
+  box-shadow: 0 0 0 1px rgba(76, 201, 240, 0.18),
+              0 8px 40px rgba(0,0,0,0.55),
+              0 0 32px rgba(76, 201, 240, 0.10) !important;
+  transform: translateY(-5px) !important;
+}
+
+/* ── Skills ────────────────────────────────────────────────── */
+.skill-category-icon {
+  background: rgba(76, 201, 240, 0.10) !important;
+  border: 1px solid rgba(76, 201, 240, 0.25) !important;
+  box-shadow: 0 0 10px rgba(76, 201, 240, 0.15) !important;
+}
+
+.skill-bar-fill {
+  background: linear-gradient(90deg, #4CC9F0, #A78BFA) !important;
+  box-shadow: 0 0 8px rgba(76, 201, 240, 0.45) !important;
+}
+
+.skill-bar-track {
+  background: rgba(255,255,255,0.06) !important;
+}
+
+.skill-percent {
+  background: linear-gradient(90deg, #4CC9F0, #A78BFA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Tech badges (About + Projects) ───────────────────────── */
+.tech-badge {
+  background: rgba(76, 201, 240, 0.06) !important;
+  border: 1px solid rgba(76, 201, 240, 0.18) !important;
+  color: #9AA4B2 !important;
+  transition: all 0.2s ease !important;
+}
+.tech-badge:hover {
+  background: rgba(76, 201, 240, 0.14) !important;
+  border-color: rgba(76, 201, 240, 0.55) !important;
+  color: #4CC9F0 !important;
+  box-shadow: 0 0 10px rgba(76, 201, 240, 0.22) !important;
+  transform: translateY(-2px) !important;
+}
+
+.project-tech-badge {
+  background: rgba(167, 139, 250, 0.06) !important;
+  border: 1px solid rgba(167, 139, 250, 0.18) !important;
+  color: #9AA4B2 !important;
+  transition: all 0.2s ease !important;
+}
+.project-tech-badge:hover {
+  background: rgba(167, 139, 250, 0.14) !important;
+  border-color: rgba(167, 139, 250, 0.55) !important;
+  color: #A78BFA !important;
+  box-shadow: 0 0 10px rgba(167, 139, 250, 0.22) !important;
+}
+
+.education-highlight-tag {
+  background: rgba(76, 201, 240, 0.05) !important;
+  border: 1px solid rgba(76, 201, 240, 0.15) !important;
+  color: #9AA4B2 !important;
+  transition: all 0.2s ease !important;
+}
+.education-highlight-tag:hover {
+  border-color: rgba(76, 201, 240, 0.45) !important;
+  color: #4CC9F0 !important;
+}
+
+/* ── Projects ──────────────────────────────────────────────── */
+.project-img-placeholder {
+  background: linear-gradient(135deg, rgba(76,201,240,0.06), rgba(167,139,250,0.06)) !important;
+}
+
+.project-category {
+  background: linear-gradient(90deg, #4CC9F0, #A78BFA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.filter-btn {
+  background: rgba(76, 201, 240, 0.04) !important;
+  border: 1px solid rgba(76, 201, 240, 0.14) !important;
+  color: #9AA4B2 !important;
+  transition: all 0.2s ease !important;
+}
+.filter-btn:hover {
+  border-color: rgba(76, 201, 240, 0.45) !important;
+  color: #4CC9F0 !important;
+  background: rgba(76, 201, 240, 0.10) !important;
+  box-shadow: 0 0 10px rgba(76, 201, 240, 0.18) !important;
+}
+.filter-btn.active {
+  background: linear-gradient(135deg, #4CC9F0, #A78BFA) !important;
+  color: #0B0E14 !important;
+  border-color: transparent !important;
+  box-shadow: 0 0 18px rgba(76, 201, 240, 0.35) !important;
+  font-weight: 700 !important;
+}
+
+.project-link.github {
+  background: rgba(76, 201, 240, 0.05) !important;
+  border: 1px solid rgba(76, 201, 240, 0.15) !important;
+  color: #9AA4B2 !important;
+  transition: all 0.2s ease !important;
+}
+.project-link.github:hover {
+  border-color: rgba(76, 201, 240, 0.50) !important;
+  color: #4CC9F0 !important;
+  background: rgba(76, 201, 240, 0.10) !important;
+  box-shadow: 0 0 12px rgba(76, 201, 240, 0.20) !important;
+}
+
+/* ── Experience timeline ───────────────────────────────────── */
+.experience-timeline::before {
+  background: linear-gradient(to bottom, #4CC9F0, #A78BFA, transparent) !important;
+  opacity: 0.5 !important;
+}
+
+.timeline-dot-inner {
+  background: #4CC9F0 !important;
+  box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.20),
+              0 0 16px rgba(76, 201, 240, 0.50) !important;
+  animation: pt-dot-breathe 2.4s ease-in-out infinite !important;
+}
+
+.timeline-type-badge {
+  background: rgba(76, 201, 240, 0.08) !important;
+  border: 1px solid rgba(76, 201, 240, 0.28) !important;
+  color: #4CC9F0 !important;
+  box-shadow: 0 0 8px rgba(76, 201, 240, 0.12) !important;
+}
+
+.timeline-company {
+  background: linear-gradient(90deg, #4CC9F0, #A78BFA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.timeline-highlight::before {
+  color: #4CC9F0 !important;
+  text-shadow: 0 0 8px rgba(76, 201, 240, 0.60) !important;
+}
+
+/* ── Education ─────────────────────────────────────────────── */
+.education-card::before {
+  background: linear-gradient(90deg, #4CC9F0, #A78BFA) !important;
+  opacity: 0.8 !important;
+  height: 2px !important;
+}
+
+.education-icon {
+  background: rgba(76, 201, 240, 0.10) !important;
+  border: 1px solid rgba(76, 201, 240, 0.25) !important;
+  color: #4CC9F0 !important;
+  box-shadow: 0 0 12px rgba(76, 201, 240, 0.15) !important;
+}
+
+.education-field {
+  background: linear-gradient(90deg, #4CC9F0, #A78BFA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.education-grade {
+  background: rgba(76, 201, 240, 0.08) !important;
+  border: 1px solid rgba(76, 201, 240, 0.28) !important;
+  color: #4CC9F0 !important;
+  box-shadow: 0 0 8px rgba(76, 201, 240, 0.12) !important;
+}
+
+/* ── Certificates ──────────────────────────────────────────── */
+.cert-card::after {
+  background: linear-gradient(90deg, #4CC9F0, #A78BFA) !important;
+}
+
+.cert-icon-wrapper {
+  background: rgba(76, 201, 240, 0.08) !important;
+  border: 1px solid rgba(76, 201, 240, 0.22) !important;
+  color: #4CC9F0 !important;
+  box-shadow: 0 0 10px rgba(76, 201, 240, 0.14) !important;
+}
+
+.cert-title {
+  background: linear-gradient(135deg, #E6E9EF, #4CC9F0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Contact ───────────────────────────────────────────────── */
+.contact-form-card {
+  border: 1px solid rgba(76, 201, 240, 0.14) !important;
+  box-shadow: 0 0 40px rgba(76, 201, 240, 0.06), 0 8px 40px rgba(0,0,0,0.5) !important;
+}
+
+.contact-detail-icon {
+  background: rgba(76, 201, 240, 0.08) !important;
+  border: 1px solid rgba(76, 201, 240, 0.22) !important;
+  color: #4CC9F0 !important;
+  box-shadow: 0 0 10px rgba(76, 201, 240, 0.12) !important;
+}
+
+.contact-social-btn {
+  background: rgba(76, 201, 240, 0.05) !important;
+  border: 1px solid rgba(76, 201, 240, 0.16) !important;
+  transition: all 0.2s ease !important;
+}
+.contact-social-btn:hover {
+  background: rgba(76, 201, 240, 0.14) !important;
+  border-color: rgba(76, 201, 240, 0.50) !important;
+  color: #4CC9F0 !important;
+  box-shadow: 0 0 16px rgba(76, 201, 240, 0.28) !important;
+  transform: translateY(-3px) !important;
+}
+
+.form-input,
+.form-textarea {
+  background: rgba(11, 14, 20, 0.80) !important;
+  border: 1px solid rgba(76, 201, 240, 0.14) !important;
+  color: #E6E9EF !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+.form-input:focus,
+.form-textarea:focus {
+  border-color: rgba(76, 201, 240, 0.50) !important;
+  box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.10),
+              0 0 16px rgba(76, 201, 240, 0.12) !important;
+}
+
+.form-submit {
+  background: linear-gradient(135deg, #4CC9F0, #A78BFA, #4CC9F0) !important;
+  background-size: 200% auto !important;
+  color: #0B0E14 !important;
+  font-weight: 700 !important;
+  animation: pt-shimmer 3s linear infinite !important;
+  box-shadow: 0 0 20px rgba(76, 201, 240, 0.28) !important;
+  border: none !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+.form-submit:hover:not(:disabled) {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 0 36px rgba(76, 201, 240, 0.45) !important;
+}
+.form-submit:disabled {
+  animation: none !important;
+  opacity: 0.5 !important;
+}
+
+/* ── Footer ────────────────────────────────────────────────── */
+.footer {
+  border-top: 1px solid rgba(76, 201, 240, 0.14) !important;
+  box-shadow: 0 -1px 0 rgba(76, 201, 240, 0.08) !important;
+}
+
+.footer-logo {
+  background: linear-gradient(90deg, #4CC9F0, #A78BFA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer-social {
+  background: rgba(76, 201, 240, 0.05) !important;
+  border: 1px solid rgba(76, 201, 240, 0.14) !important;
+  transition: all 0.2s ease !important;
+}
+.footer-social:hover {
+  background: rgba(76, 201, 240, 0.14) !important;
+  border-color: rgba(76, 201, 240, 0.50) !important;
+  color: #4CC9F0 !important;
+  box-shadow: 0 0 14px rgba(76, 201, 240, 0.28) !important;
+  transform: translateY(-2px) !important;
+}
+
+.footer-link:hover {
+  color: #4CC9F0 !important;
+  text-shadow: 0 0 8px rgba(76, 201, 240, 0.35) !important;
+}
+
+.back-to-top {
+  background: rgba(76, 201, 240, 0.06) !important;
+  border: 1px solid rgba(76, 201, 240, 0.20) !important;
+  transition: all 0.2s ease !important;
+}
+.back-to-top:hover {
+  background: rgba(76, 201, 240, 0.14) !important;
+  border-color: rgba(76, 201, 240, 0.55) !important;
+  color: #4CC9F0 !important;
+  box-shadow: 0 0 14px rgba(76, 201, 240, 0.28) !important;
+  transform: translateY(-3px) !important;
+}
+
+/* ── Loader ────────────────────────────────────────────────── */
+.loader-logo {
+  background: linear-gradient(90deg, #4CC9F0, #A78BFA, #4CC9F0);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: pt-shimmer 2s linear infinite !important;
+}
+
+.loader-bar-fill {
+  background: linear-gradient(90deg, #4CC9F0, #A78BFA) !important;
+  box-shadow: 0 0 12px rgba(76, 201, 240, 0.60) !important;
+}
+
+/* ── Scroll progress bar ───────────────────────────────────── */
+.scroll-progress {
+  background: linear-gradient(90deg, #4CC9F0, #A78BFA) !important;
+  box-shadow: 0 0 10px rgba(76, 201, 240, 0.55) !important;
+  height: 2px !important;
+}
+
+/* ── About terminal & objective ────────────────────────────── */
+.about-objective {
+  border-left: 2px solid #4CC9F0 !important;
+  background: rgba(76, 201, 240, 0.04) !important;
+  box-shadow: inset 0 0 20px rgba(76, 201, 240, 0.04) !important;
+}
+
+.about-exp-badge {
+  background: linear-gradient(135deg, #4CC9F0, #A78BFA) !important;
+  box-shadow: 0 4px 24px rgba(76, 201, 240, 0.35) !important;
+}
+
+.strength-dot {
+  background: #4CC9F0 !important;
+  box-shadow: 0 0 6px rgba(76, 201, 240, 0.60) !important;
+}
+
+/* ── Mobile menu ───────────────────────────────────────────── */
+.mobile-menu {
+  background: rgba(11, 14, 20, 0.97) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+}
+
+/* ── Reduced motion ────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .navbar-logo,
+  .hero-name,
+  .btn-primary,
+  .form-submit,
+  .loader-logo {
+    animation: none !important;
+    background-size: 100% auto !important;
+  }
+  .timeline-dot-inner {
+    animation: none !important;
+  }
+  .skill-category-card:hover,
+  .project-card:hover,
+  .timeline-card:hover,
+  .education-card:hover,
+  .cert-card:hover,
+  .btn-primary:hover,
+  .btn-ghost:hover,
+  .tech-badge:hover,
+  .contact-social-btn:hover,
+  .footer-social:hover,
+  .back-to-top:hover {
+    transform: none !important;
+  }
+}
+
+/* ── Responsive tweaks ─────────────────────────────────────── */
+@media (max-width: 768px) {
+  .btn-primary,
+  .form-submit {
+    background-size: 150% auto !important;
+  }
+}
